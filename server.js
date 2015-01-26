@@ -13,7 +13,9 @@ var ticker;
 var stats;
 var crawler 	 = require('./lib/app/crawler.js');
 crawler.refreshData();
-setInterval(crawler.refreshData(), 60000*10);
+setInterval(function(){
+	crawler.refreshData()
+}, 60000*1);
 // configuration ===============================================================
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
