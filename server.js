@@ -11,6 +11,8 @@ var path 		 = require('path');
 // Setting bitcoin data refresh
 var ticker;
 var stats;
+var marketCap;
+
 var crawler 	 = require('./lib/app/crawler.js');
 crawler.refreshData();
 setInterval(function(){
