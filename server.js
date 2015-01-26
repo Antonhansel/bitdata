@@ -5,12 +5,12 @@ var config = require('./lib/config/config.json');
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 8080;
-var flash    = require('connect-flash');
+var mongoose = require('mongoose').connect(process.env.MONGOURL);
 
 var morgan       = require('morgan');
 var bodyParser   = require('body-parser');
 var path 		 = require('path'); 
-
+var crawler 	 = require('./lib/crawler.js');
 // Setting git data refresh
 
 // configuration ===============================================================
@@ -22,10 +22,9 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(express.static(path.join(__dirname, 'public'))); // to get local files
-app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./lib/app/routes.js')(app); // load our routes and pass in our app and fully configured passport
+require('./lib/app/routes.js')(app, mongoose); // load our routes and pass in our app
 
 // launch ======================================================================
 app.listen(port);
